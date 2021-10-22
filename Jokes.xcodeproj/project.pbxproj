@@ -9,13 +9,29 @@
 /* Begin PBXBuildFile section */
 		1FA7B1002721ED7C00FA92DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B0FF2721ED7C00FA92DB /* AppDelegate.swift */; };
 		1FA7B1022721ED7C00FA92DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1012721ED7C00FA92DB /* SceneDelegate.swift */; };
-		1FA7B1042721ED7C00FA92DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1032721ED7C00FA92DB /* ViewController.swift */; };
+		1FA7B1042721ED7C00FA92DB /* JokesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1032721ED7C00FA92DB /* JokesViewController.swift */; };
 		1FA7B1072721ED7C00FA92DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA7B1052721ED7C00FA92DB /* Main.storyboard */; };
 		1FA7B1092721ED7F00FA92DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FA7B1082721ED7F00FA92DB /* Assets.xcassets */; };
 		1FA7B10C2721ED7F00FA92DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FA7B10A2721ED7F00FA92DB /* LaunchScreen.storyboard */; };
 		1FA7B1172721ED8000FA92DB /* JokesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1162721ED8000FA92DB /* JokesTests.swift */; };
 		1FA7B1212721ED8000FA92DB /* JokesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1202721ED8000FA92DB /* JokesUITests.swift */; };
 		1FA7B1232721ED8000FA92DB /* JokesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1222721ED8000FA92DB /* JokesUITestsLaunchTests.swift */; };
+		1FA7B1302721EE9C00FA92DB /* JokeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B12F2721EE9C00FA92DB /* JokeCell.swift */; };
+		1FA7B1342721F18800FA92DB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1332721F18800FA92DB /* NetworkService.swift */; };
+		1FA7B1362721F1F500FA92DB /* JokeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1352721F1F500FA92DB /* JokeResponse.swift */; };
+		1FA7B1382721F2ED00FA92DB /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1372721F2ED00FA92DB /* NetworkDataFetcher.swift */; };
+		1FA7B13B2722D81300FA92DB /* APIScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B13A2722D81300FA92DB /* APIScheme.swift */; };
+		1FA7B13E2722E43000FA92DB /* JokesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B13D2722E43000FA92DB /* JokesModel.swift */; };
+		1FA7B1402722E53200FA92DB /* JokesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B13F2722E53200FA92DB /* JokesInteractor.swift */; };
+		1FA7B1422722E5A300FA92DB /* JokePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1412722E5A300FA92DB /* JokePresenter.swift */; };
+		1FA7B1442722E6CC00FA92DB /* JokeWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1432722E6CC00FA92DB /* JokeWorker.swift */; };
+		1FA7B1462722F14D00FA92DB /* JokesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1452722F14D00FA92DB /* JokesRouter.swift */; };
+		1FA7B1492723127F00FA92DB /* JokeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1482723127F00FA92DB /* JokeInfoViewController.swift */; };
+		1FA7B151272321D100FA92DB /* JokeInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B14B272321D100FA92DB /* JokeInfoPresenter.swift */; };
+		1FA7B152272321D100FA92DB /* JokeInfoWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B14C272321D100FA92DB /* JokeInfoWorker.swift */; };
+		1FA7B153272321D100FA92DB /* JokeInfoRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B14D272321D100FA92DB /* JokeInfoRouter.swift */; };
+		1FA7B154272321D100FA92DB /* JokeInfoModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B14E272321D100FA92DB /* JokeInfoModels.swift */; };
+		1FA7B155272321D100FA92DB /* JokeInfoInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B14F272321D100FA92DB /* JokeInfoInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +55,7 @@
 		1FA7B0FC2721ED7C00FA92DB /* Jokes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jokes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA7B0FF2721ED7C00FA92DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FA7B1012721ED7C00FA92DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1FA7B1032721ED7C00FA92DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1FA7B1032721ED7C00FA92DB /* JokesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesViewController.swift; sourceTree = "<group>"; };
 		1FA7B1062721ED7C00FA92DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FA7B1082721ED7F00FA92DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FA7B10B2721ED7F00FA92DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +65,22 @@
 		1FA7B11C2721ED8000FA92DB /* JokesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JokesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FA7B1202721ED8000FA92DB /* JokesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesUITests.swift; sourceTree = "<group>"; };
 		1FA7B1222721ED8000FA92DB /* JokesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1FA7B12F2721EE9C00FA92DB /* JokeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeCell.swift; sourceTree = "<group>"; };
+		1FA7B1332721F18800FA92DB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		1FA7B1352721F1F500FA92DB /* JokeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeResponse.swift; sourceTree = "<group>"; };
+		1FA7B1372721F2ED00FA92DB /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
+		1FA7B13A2722D81300FA92DB /* APIScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIScheme.swift; sourceTree = "<group>"; };
+		1FA7B13D2722E43000FA92DB /* JokesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesModel.swift; sourceTree = "<group>"; };
+		1FA7B13F2722E53200FA92DB /* JokesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesInteractor.swift; sourceTree = "<group>"; };
+		1FA7B1412722E5A300FA92DB /* JokePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokePresenter.swift; sourceTree = "<group>"; };
+		1FA7B1432722E6CC00FA92DB /* JokeWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeWorker.swift; sourceTree = "<group>"; };
+		1FA7B1452722F14D00FA92DB /* JokesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesRouter.swift; sourceTree = "<group>"; };
+		1FA7B1482723127F00FA92DB /* JokeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoViewController.swift; sourceTree = "<group>"; };
+		1FA7B14B272321D100FA92DB /* JokeInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoPresenter.swift; sourceTree = "<group>"; };
+		1FA7B14C272321D100FA92DB /* JokeInfoWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoWorker.swift; sourceTree = "<group>"; };
+		1FA7B14D272321D100FA92DB /* JokeInfoRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoRouter.swift; sourceTree = "<group>"; };
+		1FA7B14E272321D100FA92DB /* JokeInfoModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoModels.swift; sourceTree = "<group>"; };
+		1FA7B14F272321D100FA92DB /* JokeInfoInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +131,14 @@
 		1FA7B0FE2721ED7C00FA92DB /* Jokes */ = {
 			isa = PBXGroup;
 			children = (
+				1FA7B14A272321A700FA92DB /* Scenes */,
 				1FA7B0FF2721ED7C00FA92DB /* AppDelegate.swift */,
 				1FA7B1012721ED7C00FA92DB /* SceneDelegate.swift */,
-				1FA7B1032721ED7C00FA92DB /* ViewController.swift */,
 				1FA7B1052721ED7C00FA92DB /* Main.storyboard */,
 				1FA7B1082721ED7F00FA92DB /* Assets.xcassets */,
 				1FA7B10A2721ED7F00FA92DB /* LaunchScreen.storyboard */,
 				1FA7B10D2721ED7F00FA92DB /* Info.plist */,
+				1FA7B1392721F3C800FA92DB /* Networking */,
 			);
 			path = Jokes;
 			sourceTree = "<group>";
@@ -125,6 +158,53 @@
 				1FA7B1222721ED8000FA92DB /* JokesUITestsLaunchTests.swift */,
 			);
 			path = JokesUITests;
+			sourceTree = "<group>";
+		};
+		1FA7B1392721F3C800FA92DB /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1FA7B1332721F18800FA92DB /* NetworkService.swift */,
+				1FA7B1372721F2ED00FA92DB /* NetworkDataFetcher.swift */,
+				1FA7B1352721F1F500FA92DB /* JokeResponse.swift */,
+				1FA7B13A2722D81300FA92DB /* APIScheme.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		1FA7B13C2722E41F00FA92DB /* JokesView */ = {
+			isa = PBXGroup;
+			children = (
+				1FA7B1032721ED7C00FA92DB /* JokesViewController.swift */,
+				1FA7B12F2721EE9C00FA92DB /* JokeCell.swift */,
+				1FA7B1452722F14D00FA92DB /* JokesRouter.swift */,
+				1FA7B13D2722E43000FA92DB /* JokesModel.swift */,
+				1FA7B13F2722E53200FA92DB /* JokesInteractor.swift */,
+				1FA7B1432722E6CC00FA92DB /* JokeWorker.swift */,
+				1FA7B1412722E5A300FA92DB /* JokePresenter.swift */,
+			);
+			path = JokesView;
+			sourceTree = "<group>";
+		};
+		1FA7B1472723126800FA92DB /* JokeInfo */ = {
+			isa = PBXGroup;
+			children = (
+				1FA7B1482723127F00FA92DB /* JokeInfoViewController.swift */,
+				1FA7B14B272321D100FA92DB /* JokeInfoPresenter.swift */,
+				1FA7B14C272321D100FA92DB /* JokeInfoWorker.swift */,
+				1FA7B14D272321D100FA92DB /* JokeInfoRouter.swift */,
+				1FA7B14E272321D100FA92DB /* JokeInfoModels.swift */,
+				1FA7B14F272321D100FA92DB /* JokeInfoInteractor.swift */,
+			);
+			path = JokeInfo;
+			sourceTree = "<group>";
+		};
+		1FA7B14A272321A700FA92DB /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1FA7B13C2722E41F00FA92DB /* JokesView */,
+				1FA7B1472723126800FA92DB /* JokeInfo */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +338,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FA7B1042721ED7C00FA92DB /* ViewController.swift in Sources */,
+				1FA7B1382721F2ED00FA92DB /* NetworkDataFetcher.swift in Sources */,
+				1FA7B1492723127F00FA92DB /* JokeInfoViewController.swift in Sources */,
+				1FA7B13B2722D81300FA92DB /* APIScheme.swift in Sources */,
+				1FA7B151272321D100FA92DB /* JokeInfoPresenter.swift in Sources */,
+				1FA7B1342721F18800FA92DB /* NetworkService.swift in Sources */,
+				1FA7B1042721ED7C00FA92DB /* JokesViewController.swift in Sources */,
+				1FA7B1462722F14D00FA92DB /* JokesRouter.swift in Sources */,
+				1FA7B1422722E5A300FA92DB /* JokePresenter.swift in Sources */,
 				1FA7B1002721ED7C00FA92DB /* AppDelegate.swift in Sources */,
+				1FA7B1302721EE9C00FA92DB /* JokeCell.swift in Sources */,
+				1FA7B153272321D100FA92DB /* JokeInfoRouter.swift in Sources */,
+				1FA7B1402722E53200FA92DB /* JokesInteractor.swift in Sources */,
+				1FA7B13E2722E43000FA92DB /* JokesModel.swift in Sources */,
 				1FA7B1022721ED7C00FA92DB /* SceneDelegate.swift in Sources */,
+				1FA7B155272321D100FA92DB /* JokeInfoInteractor.swift in Sources */,
+				1FA7B1442722E6CC00FA92DB /* JokeWorker.swift in Sources */,
+				1FA7B152272321D100FA92DB /* JokeInfoWorker.swift in Sources */,
+				1FA7B154272321D100FA92DB /* JokeInfoModels.swift in Sources */,
+				1FA7B1362721F1F500FA92DB /* JokeResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
