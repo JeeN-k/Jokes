@@ -79,7 +79,7 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
         super.viewDidLoad()
         setup()
         
-        getJokeData()
+        setupLabels()
         setupLabelConstraints()
     }
     
@@ -112,11 +112,6 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
         return nil
     }
     
-    private func getJokeData() {
-        guard let id = id else { return }
-        interactor?.makeRequest(request: .getJokeInfo(jokeId: id))
-    }
-    
     private func translateText(from translationStrings: [String]) {
         translatedJoke = translationStrings
         categoryJoke.text = translationStrings.first
@@ -131,9 +126,6 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
     
     func display(viewModel: JokeInfo.Model.ViewModel.ViewModelData) {
         switch viewModel {
-        case .displayJoke(let jokeItem):
-            self.jokeItem = jokeItem
-            setupLabels()
         case .dispalyTranslation(let translation):
             let translationStrings = translation.map { $0.text }
             translateText(from: translationStrings)

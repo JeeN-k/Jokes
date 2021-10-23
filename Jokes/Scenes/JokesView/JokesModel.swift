@@ -23,7 +23,7 @@ enum Jokelist {
         }
         struct ViewModel {
             enum ViewModelData {
-                case displayJokes(jokeViewModel: JokeViewModel)
+                case displayJokes(jokeViewModel: JokeViewModel, joke: [JokeItem])
             }
         }
     }

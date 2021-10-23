@@ -15,7 +15,7 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
     
     var interactor: JokesBusinessLogic?
     var router: (NSObjectProtocol & JokesRoutingLogic)?
-    var touchedJokeId: Int?
+    var touchedJoke: JokeItem?
     
     private var refreshControl: UIRefreshControl = {
         let refreshConrtol = UIRefreshControl()
@@ -27,6 +27,7 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
     @IBOutlet weak var tableView: UITableView!
     
     private var jokesViewModel = JokeViewModel.init(cells: [])
+    private var jokeItems = [JokeItem]()
     
     private func setup() {
         let viewController        = self
@@ -55,8 +56,9 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
     
     func display(viewModel: Jokelist.Model.ViewModel.ViewModelData) {
         switch viewModel {
-        case .displayJokes(let jokesViewModel):
+        case .displayJokes(let jokesViewModel, let jokes):
             self.jokesViewModel = jokesViewModel
+            self.jokeItems = jokes
             tableView.reloadData()
             refreshControl.endRefreshing()
         }
@@ -84,14 +86,15 @@ extension JokesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        touchedJokeId = jokesViewModel.cells[indexPath.row].id
+        let touchedJokeId = jokesViewModel.cells[indexPath.row].id
+        touchedJoke = jokeItems.first(where: {$0.id == touchedJokeId})
         performSegue(withIdentifier: "showJoke", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is JokeInfoViewController {
             let vc = segue.destination as? JokeInfoViewController
-            vc?.id = touchedJokeId
+            vc?.jokeItem = touchedJoke
         }
     }
 }

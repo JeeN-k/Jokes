@@ -22,10 +22,6 @@ class JokeInfoInteractor: JokeInfoBusinessLogic {
             service = JokeInfoService()
         }
         switch request {
-        case .getJokeInfo(let jokeId):
-            service?.getJokeInfo(jokeID: jokeId, completion: { jokeItem in
-                self.presenter?.presentData(response: .presentJoke(joke: jokeItem))
-            })
         case .translateText(let texts):
             service?.getTraslations(from: texts, completion: { translations in
                 self.presenter?.presentData(response: .presentTranslation(tranlations: translations))

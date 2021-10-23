@@ -22,7 +22,7 @@ class JokePresenter: JokePresentationLogic {
                 cellViewModel(from: jokeItem)
             }
             let jokeViewModel = JokeViewModel.init(cells: cells)
-            viewController?.display(viewModel: .displayJokes(jokeViewModel: jokeViewModel))
+            viewController?.display(viewModel: .displayJokes(jokeViewModel: jokeViewModel, joke: joke))
         }
     }
     
