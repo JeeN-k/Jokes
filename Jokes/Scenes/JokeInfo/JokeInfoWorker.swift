@@ -13,6 +13,7 @@ class JokeInfoService {
     var fetcher: DataFetcher
     
     private var jokeItem: JokeItem?
+    private var translation: [Translation]?
     
     init() {
         self.networking = NetworkService()
@@ -24,6 +25,14 @@ class JokeInfoService {
             self?.jokeItem = jokeItem
             guard let jokeItem = jokeItem else { return }
             completion(jokeItem)
+        }
+    }
+    
+    func getTraslations(from texts: [String], completion: @escaping([Translation]) -> ()) {
+        fetcher.getTranslations(texts: texts) { [weak self] translation in
+            self?.translation = translation
+            guard let translation = translation else { return }
+            completion(translation)
         }
     }
 }

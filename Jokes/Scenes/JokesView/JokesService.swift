@@ -7,7 +7,7 @@
 
 import Foundation
 
-class JokeWorker {
+class JokesService {
     var networking: Networking
     var fetcher: DataFetcher
     

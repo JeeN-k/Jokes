@@ -14,12 +14,12 @@ protocol JokesBusinessLogic {
 class JokesInteractor: JokesBusinessLogic {
     
     var presenter: JokePresentationLogic?
-    var service: JokeWorker?
+    var service: JokesService?
     
     
     func makeRequest(request: Jokelist.Model.Request.RequestType) {
         if service == nil {
-            service = JokeWorker()
+            service = JokesService()
         }
         
         switch request {

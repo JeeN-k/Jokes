@@ -11,6 +11,7 @@ import UIKit
 protocol DataFetcher {
     func getJokes(response: @escaping([JokeItem]?) -> ())
     func getJokeInfo(jokeID: Int, response: @escaping(JokeItem?) -> ())
+    func getTranslations(texts: [String], response: @escaping ([Translation]?) -> ())    
 }
 
 class NetworkDataFetcher: DataFetcher {
@@ -22,7 +23,8 @@ class NetworkDataFetcher: DataFetcher {
     
     func getJokes(response: @escaping ([JokeItem]?) -> ()) {
         let params = ["amount": "100"]
-        networking.request(path: APIJoke.joke, parameters: params) { data, error in
+        let api = APIS.joke.getAPI()
+        networking.getRequest(apiScheme: api, parameters: params) { data, error in
             if let error = error {
                 print("Error data recieved \(error.localizedDescription)")
                 response(nil)
@@ -34,13 +36,28 @@ class NetworkDataFetcher: DataFetcher {
     
     func getJokeInfo(jokeID: Int, response: @escaping (JokeItem?) -> ()) {
         let params = ["idRange": String(jokeID)]
-        networking.request(path: APIJoke.joke, parameters: params) { data, error in
+        let api = APIS.joke.getAPI()
+        networking.getRequest(apiScheme: api, parameters: params) { data, error in
             if let error = error {
                 print("Error data recieved \(error.localizedDescription)")
                 response(nil)
             }
             let decoded = self.decodeJSON(type: JokeItem.self, from: data)
             response(decoded)
+        }
+    }
+    
+    func getTranslations(texts: [String], response: @escaping ([Translation]?) -> ()) {
+        let params: [String: Any] = ["targetLanguageCode": "ru", "texts": texts]
+        let headers = ["Authorization": APIScheme.yandexKey]
+        let api = APIS.translate.getAPI()
+        networking.postRequest(apiScheme: api, headers: headers, parameters: params) { data, error in
+            if let error = error {
+                print("Error data recieved \(error.localizedDescription)")
+                response(nil)
+            }
+            let decoded = self.decodeJSON(type: TranslateResponse.self, from: data)
+            response(decoded?.translations)
         }
     }
     

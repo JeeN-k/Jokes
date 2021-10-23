@@ -14,16 +14,19 @@ enum JokeInfo {
         struct Request {
             enum RequestType {
                 case getJokeInfo(jokeId: Int)
+                case translateText(texts: [String])
             }
         }
         struct Response {
             enum ResponseType {
                 case presentJoke(joke: JokeItem)
+                case presentTranslation(tranlations: [Translation])
             }
         }
         struct ViewModel {
             enum ViewModelData {
                 case displayJoke(jokeItem: JokeItem)
+                case dispalyTranslation(translation: [Translation])
             }
         }
     }   

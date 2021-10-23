@@ -15,7 +15,13 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
     
     var interactor: JokesBusinessLogic?
     var router: (NSObjectProtocol & JokesRoutingLogic)?
-    var touchedJoke: JokeItem?
+    var touchedJokeId: Int?
+    
+    private var refreshControl: UIRefreshControl = {
+        let refreshConrtol = UIRefreshControl()
+        refreshConrtol.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        return refreshConrtol
+    }()
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -42,6 +48,7 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         view.backgroundColor = #colorLiteral(red: 0.6189912558, green: 0.6920314431, blue: 0.3463213444, alpha: 1)
+        tableView.addSubview(refreshControl)
         
         interactor?.makeRequest(request: .getJokes)
     }
@@ -51,7 +58,12 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
         case .displayJokes(let jokesViewModel):
             self.jokesViewModel = jokesViewModel
             tableView.reloadData()
+            refreshControl.endRefreshing()
         }
+    }
+    
+    @objc private func refresh() {
+        interactor?.makeRequest(request: .getJokes)
     }
 }
 
@@ -72,9 +84,14 @@ extension JokesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = JokeInfoViewController(nibName: "JokeInfoViewController", bundle: nil)
-        vc.id = jokesViewModel.cells[indexPath.row].id
-        
+        touchedJokeId = jokesViewModel.cells[indexPath.row].id
         performSegue(withIdentifier: "showJoke", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is JokeInfoViewController {
+            let vc = segue.destination as? JokeInfoViewController
+            vc?.id = touchedJokeId
+        }
     }
 }

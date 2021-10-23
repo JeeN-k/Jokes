@@ -19,6 +19,8 @@ class JokeInfoPresenter: JokeInfoPresentationLogic {
         switch response {
         case .presentJoke(let jokeItem):
             viewController?.display(viewModel: .displayJoke(jokeItem: jokeItem))
+        case .presentTranslation(let tranlations):
+            viewController?.display(viewModel: .dispalyTranslation(translation: tranlations))
         }
     }
     
