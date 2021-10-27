@@ -10,21 +10,27 @@ import UIKit
 
 enum JokeInfo {
     
-    enum Model {
+    enum getJokeInfo {
         struct Request {
-            enum RequestType {
-                case translateText(texts: [String])
-            }
+
         }
         struct Response {
-            enum ResponseType {
-                case presentTranslation(tranlations: [Translation])
-            }
+            var joke: JokeItem
         }
         struct ViewModel {
-            enum ViewModelData {
-                case dispalyTranslation(translation: [Translation])
-            }
+            var joke: JokeItem
         }
-    }   
+    }
+    
+    enum translateJoke {
+        struct Request{
+            var texts: [String]
+        }
+        struct Response {
+            var translations: [Translation]
+        }
+        struct ViewModel {
+            var translation: [Translation]
+        }
+    }
 }

@@ -12,8 +12,12 @@ protocol JokeInfoRoutingLogic {
     
 }
 
-class JokeInfoRouter: NSObject, JokeInfoRoutingLogic {
-    
+protocol JokeInfoDataPassing {
+    var dataStore: JokeInfoDataStore? { get }
+}
+
+class JokeInfoRouter: NSObject, JokeInfoRoutingLogic, JokeInfoDataPassing {
+    var dataStore: JokeInfoDataStore?
     weak var viewController: JokeInfoViewController?
     
     // MARK: Routing

@@ -9,24 +9,34 @@
 import UIKit
 
 protocol JokeInfoBusinessLogic {
-    func makeRequest(request: JokeInfo.Model.Request.RequestType)
+    func getJokeInfo(request: JokeInfo.getJokeInfo.Request)
+    func translateJoke(request: JokeInfo.translateJoke.Request)
 }
 
-class JokeInfoInteractor: JokeInfoBusinessLogic {
-    
+protocol JokeInfoDataStore {
+    var jokeInfo: JokeItem? { get set }
+}
+
+final class JokeInfoInteractor: JokeInfoBusinessLogic, JokeInfoDataStore {
+    var jokeInfo: JokeItem?
     var presenter: JokeInfoPresentationLogic?
     var service: JokeInfoService?
     
-    func makeRequest(request: JokeInfo.Model.Request.RequestType) {
+    func getJokeInfo(request: JokeInfo.getJokeInfo.Request) {
+        guard let jokeInfo = jokeInfo else {
+            return
+        }
+        let response = JokeInfo.getJokeInfo.Response(joke: jokeInfo)
+        presenter?.presentJokeInfo(response: response)
+    }
+    
+    func translateJoke(request: JokeInfo.translateJoke.Request) {
         if service == nil {
             service = JokeInfoService()
         }
-        switch request {
-        case .translateText(let texts):
-            service?.getTraslations(from: texts, completion: { translations in
-                self.presenter?.presentData(response: .presentTranslation(tranlations: translations))
-            })
-        }
+        service?.getTraslations(from: request.texts, completion: { translations in
+            let response = JokeInfo.translateJoke.Response(translations: translations)
+            self.presenter?.presentTranslatedJoke(response: response)
+        })
     }
-    
 }

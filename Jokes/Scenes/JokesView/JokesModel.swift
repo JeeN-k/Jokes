@@ -9,22 +9,21 @@ import Foundation
 
 
 enum Jokelist {
-    
-    enum Model {
+    enum FetchJokes {
         struct Request {
-            enum RequestType {
-                case getJokes
-            }
         }
         struct Response {
-            enum ResponseType {
-                case presentJokes(joke: [JokeItem])
-            }
+            var jokes: [JokeItem]    
         }
         struct ViewModel {
-            enum ViewModelData {
-                case displayJokes(jokeViewModel: JokeViewModel, joke: [JokeItem])
-            }
+            var jokeViewModel: JokeViewModel
+            var jokes: [JokeItem]
+        }
+    }
+    
+    enum SelectJoke {
+        struct Request {
+            let index: Int
         }
     }
 }

@@ -9,17 +9,21 @@
 import UIKit
 
 protocol JokeInfoPresentationLogic {
-    func presentData(response: JokeInfo.Model.Response.ResponseType)
+    func presentJokeInfo(response: JokeInfo.getJokeInfo.Response)
+    func presentTranslatedJoke(response: JokeInfo.translateJoke.Response)
 }
 
 class JokeInfoPresenter: JokeInfoPresentationLogic {
     weak var viewController: JokeInfoDisplayLogic?
     
-    func presentData(response: JokeInfo.Model.Response.ResponseType) {
-        switch response {
-        case .presentTranslation(let tranlations):
-            viewController?.display(viewModel: .dispalyTranslation(translation: tranlations))
-        }
+    
+    func presentJokeInfo(response: JokeInfo.getJokeInfo.Response) {
+        let viewModel = JokeInfo.getJokeInfo.ViewModel(joke: response.joke)
+        viewController?.displayJokeInfo(viewModel: viewModel)
     }
     
+    func presentTranslatedJoke(response: JokeInfo.translateJoke.Response) {
+        let viewModel = JokeInfo.translateJoke.ViewModel(translation: response.translations)
+        viewController?.displayTranslatedJoke(viewModel: viewModel)
+    }
 }

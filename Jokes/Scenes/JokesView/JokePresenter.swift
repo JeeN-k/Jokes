@@ -8,22 +8,23 @@
 import Foundation
 
 protocol JokePresentationLogic {
-    func presentData(response: Jokelist.Model.Response.ResponseType)
+    func presentJokes(response: Jokelist.FetchJokes.Response)
 }
 
 class JokePresenter: JokePresentationLogic {
+
+    
     
     weak var viewController: JokesDisplayLogic?
     
-    func presentData(response: Jokelist.Model.Response.ResponseType) {
-        switch response {
-        case .presentJokes(let joke):
-            let cells = joke.map { jokeItem in
-                cellViewModel(from: jokeItem)
-            }
-            let jokeViewModel = JokeViewModel.init(cells: cells)
-            viewController?.display(viewModel: .displayJokes(jokeViewModel: jokeViewModel, joke: joke))
+    func presentJokes(response: Jokelist.FetchJokes.Response) {
+        let joke = response.jokes
+        let cells = joke.map { jokeItem in
+            cellViewModel(from: jokeItem)
         }
+        let jokeViewModel = JokeViewModel.init(cells: cells)
+        let viewModel = Jokelist.FetchJokes.ViewModel(jokeViewModel: jokeViewModel, jokes: joke)
+        viewController?.displayJokes(viewModel: viewModel)
     }
     
     private func cellViewModel(from jokeItem: JokeItem) -> JokeViewModel.Cell {

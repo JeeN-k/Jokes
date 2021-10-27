@@ -8,14 +8,14 @@
 import UIKit
 
 protocol JokesDisplayLogic: AnyObject {
-    func display(viewModel: Jokelist.Model.ViewModel.ViewModelData)
+    func displayJokes(viewModel: Jokelist.FetchJokes.ViewModel)
 }
 
 class JokesViewController: UIViewController, JokesDisplayLogic {
     
     var interactor: JokesBusinessLogic?
-    var router: (NSObjectProtocol & JokesRoutingLogic)?
-    var touchedJoke: JokeItem?
+    var router: (NSObjectProtocol & JokesRoutingLogic & JokeDataPassing)?
+    var selectedJoke: JokeItem?
     
     private var refreshControl: UIRefreshControl = {
         let refreshConrtol = UIRefreshControl()
@@ -23,6 +23,15 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
         return refreshConrtol
     }()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -39,33 +48,55 @@ class JokesViewController: UIViewController, JokesDisplayLogic {
         interactor.presenter      = presenter
         presenter.viewController  = viewController
         router.viewController     = viewController
+        router.dataStore          = interactor
+    }
+    
+    // MARK: Routing
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if let scene = segue.identifier {
+            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
+            print(selector)
+            if let router = router, router.responds(to: selector) {
+                router.perform(selector, with: segue)
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        
+        setupTable()
+        requestToFetchJokes()
+    }
+    
+    func displayJokes(viewModel: Jokelist.FetchJokes.ViewModel) {
+        jokesViewModel = viewModel.jokeViewModel
+        jokeItems = viewModel.jokes
+        tableView.reloadData()
+        refreshControl.endRefreshing()
+    }
+    
+    private func setupTable() {
         tableView.register(JokeCell.self, forCellReuseIdentifier: JokeCell.reuseID)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         view.backgroundColor = #colorLiteral(red: 0.6189912558, green: 0.6920314431, blue: 0.3463213444, alpha: 1)
         tableView.addSubview(refreshControl)
-        
-        interactor?.makeRequest(request: .getJokes)
     }
     
-    func display(viewModel: Jokelist.Model.ViewModel.ViewModelData) {
-        switch viewModel {
-        case .displayJokes(let jokesViewModel, let jokes):
-            self.jokesViewModel = jokesViewModel
-            self.jokeItems = jokes
-            tableView.reloadData()
-            refreshControl.endRefreshing()
-        }
+    private func requestToFetchJokes() {
+        let request = Jokelist.FetchJokes.Request()
+        interactor?.getJokes(request: request)
+    }
+    
+    private func requestToSelectJoke(index: Int) {
+        let request = Jokelist.SelectJoke.Request(index: index)
+        interactor?.selectJoke(requst: request)
     }
     
     @objc private func refresh() {
-        interactor?.makeRequest(request: .getJokes)
+        requestToFetchJokes()
     }
 }
 
@@ -86,15 +117,7 @@ extension JokesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let touchedJokeId = jokesViewModel.cells[indexPath.row].id
-        touchedJoke = jokeItems.first(where: {$0.id == touchedJokeId})
-        performSegue(withIdentifier: "showJoke", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination is JokeInfoViewController {
-            let vc = segue.destination as? JokeInfoViewController
-            vc?.jokeItem = touchedJoke
-        }
+        requestToSelectJoke(index: indexPath.row)
+        router?.routeToJokeInfo(segue: nil)
     }
 }

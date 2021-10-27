@@ -8,26 +8,37 @@
 import Foundation
 
 protocol JokesBusinessLogic {
-    func makeRequest(request: Jokelist.Model.Request.RequestType)
+    func getJokes(request: Jokelist.FetchJokes.Request)
+    func selectJoke(requst: Jokelist.SelectJoke.Request)
 }
 
-class JokesInteractor: JokesBusinessLogic {
-    
+protocol JokesDataStore {
+    var jokes: [JokeItem] { get set }
+    var selectedJoke: JokeItem? { get set }
+}
+
+class JokesInteractor: JokesBusinessLogic, JokesDataStore {
     var presenter: JokePresentationLogic?
     var service: JokesService?
     
+    var selectedJoke: JokeItem?
+    var jokes: [JokeItem] = []
     
-    func makeRequest(request: Jokelist.Model.Request.RequestType) {
+    func getJokes(request: Jokelist.FetchJokes.Request) {
         if service == nil {
             service = JokesService()
         }
         
-        switch request {
-        case .getJokes:
-            service?.getJokes(completion: { jokeResponse in
-                self.presenter?.presentData(response: .presentJokes(joke: jokeResponse))
-            })
-        }
+        service?.getJokes(completion: { jokeResponse in
+            self.jokes = jokeResponse
+            let response = Jokelist.FetchJokes.Response(jokes: jokeResponse)
+            self.presenter?.presentJokes(response: response)
+        })
+    }
+    
+    func selectJoke(requst: Jokelist.SelectJoke.Request) {
+        guard !jokes.isEmpty else { return }
         
+        self.selectedJoke = jokes[requst.index]
     }
 }

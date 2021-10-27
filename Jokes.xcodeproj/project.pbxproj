@@ -24,7 +24,7 @@
 		1FA7B13E2722E43000FA92DB /* JokesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B13D2722E43000FA92DB /* JokesModel.swift */; };
 		1FA7B1402722E53200FA92DB /* JokesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B13F2722E53200FA92DB /* JokesInteractor.swift */; };
 		1FA7B1422722E5A300FA92DB /* JokePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1412722E5A300FA92DB /* JokePresenter.swift */; };
-		1FA7B1442722E6CC00FA92DB /* JokesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1432722E6CC00FA92DB /* JokesService.swift */; };
+		1FA7B1442722E6CC00FA92DB /* JokesWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1432722E6CC00FA92DB /* JokesWorker.swift */; };
 		1FA7B1462722F14D00FA92DB /* JokesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1452722F14D00FA92DB /* JokesRouter.swift */; };
 		1FA7B1492723127F00FA92DB /* JokeInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B1482723127F00FA92DB /* JokeInfoViewController.swift */; };
 		1FA7B151272321D100FA92DB /* JokeInfoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA7B14B272321D100FA92DB /* JokeInfoPresenter.swift */; };
@@ -74,7 +74,7 @@
 		1FA7B13D2722E43000FA92DB /* JokesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesModel.swift; sourceTree = "<group>"; };
 		1FA7B13F2722E53200FA92DB /* JokesInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesInteractor.swift; sourceTree = "<group>"; };
 		1FA7B1412722E5A300FA92DB /* JokePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokePresenter.swift; sourceTree = "<group>"; };
-		1FA7B1432722E6CC00FA92DB /* JokesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesService.swift; sourceTree = "<group>"; };
+		1FA7B1432722E6CC00FA92DB /* JokesWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesWorker.swift; sourceTree = "<group>"; };
 		1FA7B1452722F14D00FA92DB /* JokesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokesRouter.swift; sourceTree = "<group>"; };
 		1FA7B1482723127F00FA92DB /* JokeInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoViewController.swift; sourceTree = "<group>"; };
 		1FA7B14B272321D100FA92DB /* JokeInfoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JokeInfoPresenter.swift; sourceTree = "<group>"; };
@@ -110,6 +110,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F376C2127286ED6006EB352 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1F376C2327286EF3006EB352 /* JokeInfo */,
+				1F376C2227286EEC006EB352 /* Jokes */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		1F376C2227286EEC006EB352 /* Jokes */ = {
+			isa = PBXGroup;
+			children = (
+				1F376C2427286F01006EB352 /* Spies */,
+			);
+			path = Jokes;
+			sourceTree = "<group>";
+		};
+		1F376C2327286EF3006EB352 /* JokeInfo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = JokeInfo;
+			sourceTree = "<group>";
+		};
+		1F376C2427286F01006EB352 /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Spies;
+			sourceTree = "<group>";
+		};
 		1FA7B0F32721ED7C00FA92DB = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +179,7 @@
 		1FA7B1152721ED8000FA92DB /* JokesTests */ = {
 			isa = PBXGroup;
 			children = (
+				1F376C2127286ED6006EB352 /* Scenes */,
 				1FA7B1162721ED8000FA92DB /* JokesTests.swift */,
 			);
 			path = JokesTests;
@@ -182,7 +214,7 @@
 				1FA7B1452722F14D00FA92DB /* JokesRouter.swift */,
 				1FA7B13D2722E43000FA92DB /* JokesModel.swift */,
 				1FA7B13F2722E53200FA92DB /* JokesInteractor.swift */,
-				1FA7B1432722E6CC00FA92DB /* JokesService.swift */,
+				1FA7B1432722E6CC00FA92DB /* JokesWorker.swift */,
 				1FA7B1412722E5A300FA92DB /* JokePresenter.swift */,
 			);
 			path = JokesView;
@@ -357,7 +389,7 @@
 				1FA7B1022721ED7C00FA92DB /* SceneDelegate.swift in Sources */,
 				1FA7B155272321D100FA92DB /* JokeInfoInteractor.swift in Sources */,
 				1FA7B1582724505300FA92DB /* TranslateResponse.swift in Sources */,
-				1FA7B1442722E6CC00FA92DB /* JokesService.swift in Sources */,
+				1FA7B1442722E6CC00FA92DB /* JokesWorker.swift in Sources */,
 				1FA7B152272321D100FA92DB /* JokeInfoWorker.swift in Sources */,
 				1FA7B154272321D100FA92DB /* JokeInfoModels.swift in Sources */,
 				1FA7B1362721F1F500FA92DB /* JokeResponse.swift in Sources */,

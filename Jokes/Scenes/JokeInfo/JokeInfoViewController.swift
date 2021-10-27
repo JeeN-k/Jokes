@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 
 protocol JokeInfoDisplayLogic: AnyObject {
-    func display(viewModel: JokeInfo.Model.ViewModel.ViewModelData)
+    func displayJokeInfo(viewModel: JokeInfo.getJokeInfo.ViewModel)
+    func displayTranslatedJoke(viewModel: JokeInfo.translateJoke.ViewModel)
 }
 
 class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
@@ -54,9 +55,18 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
         return button
     }()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+      super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+      setup()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+      super.init(coder: aDecoder)
+      setup()
+    }
     
     var interactor: JokeInfoBusinessLogic?
-    var router: (NSObjectProtocol & JokeInfoRoutingLogic)?
+    private(set) var router: (NSObjectProtocol & JokeInfoRoutingLogic & JokeInfoDataPassing)?
     var translatedJoke: [String]?
     var translated = false
     
@@ -70,17 +80,17 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
         let router                = JokeInfoRouter()
         viewController.router     = router
         viewController.interactor = interactor
+        
         interactor.presenter      = presenter
         presenter.viewController  = viewController
+        
         router.viewController     = viewController
+        router.dataStore          = interactor
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
-        
-        setupLabels()
-        setupLabelConstraints()
+        requestToShowJokeInfo()
     }
     
     @objc func translateTouch() {
@@ -91,7 +101,7 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
         if !translated && translatedJoke == nil {
             let texts = setupTextToTranslate()
             guard let texts = texts else { return }
-            interactor?.makeRequest(request: .translateText(texts: texts))
+            requestForTranslate(texts)
         } else if translated {
             setupLabels()
         } else if !translated {
@@ -99,6 +109,16 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
             translateText(from: translatedJoke)
         }
         translated = !translated
+    }
+    
+    private func requestForTranslate(_ texts: [String]) {
+        let request = JokeInfo.translateJoke.Request(texts: texts)
+        interactor?.translateJoke(request: request)
+    }
+    
+    private func requestToShowJokeInfo() {
+        let request = JokeInfo.getJokeInfo.Request()
+        interactor?.getJokeInfo(request: request)
     }
     
     private func setupTextToTranslate() -> [String]? {
@@ -124,15 +144,16 @@ class JokeInfoViewController: UIViewController, JokeInfoDisplayLogic {
         tranlsateButton.setTitle("Оригинал", for: .normal)
     }
     
-    func display(viewModel: JokeInfo.Model.ViewModel.ViewModelData) {
-        switch viewModel {
-        case .dispalyTranslation(let translation):
-            let translationStrings = translation.map { $0.text }
-            translateText(from: translationStrings)
-        }
+    func displayJokeInfo(viewModel: JokeInfo.getJokeInfo.ViewModel) {
+        self.jokeItem = viewModel.joke
+        setupLabels()
+        setupLabelConstraints()
     }
     
-    
+    func displayTranslatedJoke(viewModel: JokeInfo.translateJoke.ViewModel) {
+        let translationsStrings = viewModel.translation.map { $0.text }
+        translateText(from: translationsStrings)
+    }
 }
 
 // MARK: Work with objects
@@ -145,7 +166,7 @@ extension JokeInfoViewController {
         view.addSubview(deliveryJoke)
         view.addSubview(tranlsateButton)
         
-        categoryJoke.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
+        categoryJoke.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         categoryJoke.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         jokeLabel.topAnchor.constraint(equalTo: categoryJoke.bottomAnchor, constant: 20).isActive = true
